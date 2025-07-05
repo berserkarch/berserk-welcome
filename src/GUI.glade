@@ -236,6 +236,21 @@
                     <property name="valign">center</property>
                     <property name="orientation">vertical</property>
                     <child>
+                      <object class="GtkImage" id="info-header-logo">
+                        <property name="width-request">250</property>
+                        <property name="height-request">250</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="pixbuf">images/logo-banner-1.png</property>
+                        <property name="pixel-size">192</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
                       <object class="GtkLabel" id="label_info_header1">
                         <property name="visible">True</property>
                         <property name="can-focus">False</property>
@@ -245,7 +260,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">0</property>
+                        <property name="position">1</property>
                       </packing>
                     </child>
                     <child>
@@ -259,7 +274,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">1</property>
+                        <property name="position">2</property>
                       </packing>
                     </child>
                     <child>
@@ -319,7 +334,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -336,6 +351,7 @@
                     <property name="halign">center</property>
                     <property name="valign">center</property>
                     <property name="orientation">vertical</property>
+                    <property name="spacing">3</property>
                     <child>
                       <object class="GtkLabel" id="label_credits_title">
                         <property name="visible">True</property>
@@ -365,18 +381,62 @@
                       </packing>
                     </child>
                     <child>
-                      <object class="GtkLabel" id="label_credits1">
+                      <object class="GtkBox">
                         <property name="visible">True</property>
-                        <property name="can-focus">True</property>
-                        <property name="label">&lt;a href="https://thehackersbrain.xyz/"&gt;(@thehackersbrain)&lt;/a&gt;</property>
-                        <property name="use-markup">True</property>
-                        <property name="justify">center</property>
-                        <property name="selectable">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="valign">center</property>
+                        <property name="spacing">3</property>
+                        <child>
+                          <object class="GtkLabel" id="p-link-1">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="label">&lt;a href="https://thehackersbrain.xyz"&gt;Portfolio&lt;/a&gt;</property>
+                            <property name="use-markup">True</property>
+                            <property name="justify">center</property>
+                            <property name="selectable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="p-link-2">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="label">&lt;a href="http://blog.thehackersbrain.xyz"&gt;Blog&lt;/a&gt;</property>
+                            <property name="use-markup">True</property>
+                            <property name="justify">center</property>
+                            <property name="selectable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="p-link-3">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="label">&lt;a href="https://github.com/thehackersbrain"&gt;Github&lt;/a&gt;</property>
+                            <property name="use-markup">True</property>
+                            <property name="justify">center</property>
+                            <property name="selectable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
                       </object>
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">2</property>
+                        <property name="position">3</property>
                       </packing>
                     </child>
                     <child>
@@ -391,7 +451,7 @@
                       <packing>
                         <property name="expand">False</property>
                         <property name="fill">True</property>
-                        <property name="position">3</property>
+                        <property name="position">4</property>
                       </packing>
                     </child>
                   </object>
@@ -406,6 +466,19 @@
                 <property name="expand">True</property>
                 <property name="fill">True</property>
                 <property name="position">1</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkLabel" id="label_notify">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="use-markup">True</property>
+                <property name="justify">center</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">2</property>
               </packing>
             </child>
             <style>

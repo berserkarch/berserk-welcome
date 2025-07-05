@@ -1,5 +1,6 @@
 import gi
 import sys
+import threading
 import subprocess
 
 gi.require_version("Gtk", "3.0")
@@ -37,22 +38,23 @@ class Handler:
     def on_main_window_destroy(self):
         Gtk.main_quit()
 
-    def on_button_clicked(self, widget, command, message):
-        print(f"INFO: {message}")
-        print(f"COMMAND: {command}")
+    def on_button_clicked(self, widget, command: list, message: str):
         self.label_notify.set_markup(f"<b>{message}...</b>")
+        self.run_cmd(command)
 
     def on_easy_install_clicked(self, widget):
-        self.launch_bootloader_dialog("Easy Installation")
+        self.label_notify.set_markup("Running the Installer...")
+        self.run_cmd(["pkexec", "calamares", "--debug"])
+        self.window.get_application().quit()
 
     def on_adv_install_clicked(self, widget):
         self.launch_advanced_installer_dialog("Advanced Installation")
 
     def on_gp_clicked(self, widget):
-        self.on_button_clicked(widget, "gparted", "Launching GParted")
+        self.on_button_clicked(widget, ["pkexec", "gparted"], "Launching GParted...")
 
     def on_mirror_clicked(self, widget):
-        self.on_button_clicked(widget, "reflector-simple", "Updating mirrors")
+        self.on_button_clicked(widget, ["pkexec", "pacman", "-Syyu", "--noconfirm"], "Updating mirrors...")
     
     def on_quit_clicked(self, widget):
         self.window.get_application().quit()
@@ -74,32 +76,28 @@ class Handler:
         dialog.destroy()
 
     def run_cmd(self, cmd_array):
-        print(f"THREAD: Running command: {' '.join(cmd_array)}")
-        try:
-            subprocess.run(cmd_array, check=True)
-        except FileNotFoundError:
-            GLib.idle_add(self.label_notify.set_markup, "<span foreground='red'><b>Command not found!</b></span>")
-        except subprocess.CalledProcessError as e:
-            GLib.idle_add(self.label_notify.set_markup, f"<span foreground='red'><b>Error: {e}</b></span>")
-        else:
-            GLib.idle_add(self.label_notify.set_markup, "<b>Task completed!</b>")
+        def _run():
+            print(f"THREAD: Running command: {' '.join(cmd_array)}")
+            GLib.timeout_add_seconds(5, lambda: self.label_notify.set_markup("") or False)
+            try:
+                subprocess.run(cmd_array, check=True)
+            except FileNotFoundError:
+                GLib.idle_add(self.label_notify.set_markup, "<span foreground='red'><b>Command not found!</b></span>")
+            except subprocess.CalledProcessError as e:
+                GLib.idle_add(self.label_notify.set_markup, f"<span foreground='red'><b>Error: {e}</b></span>")
+            else:
+                GLib.idle_add(self.label_notify.set_markup, "<span foreground='green'><b>Task completed!</b></span>")
+        
+        threading.Thread(target=_run, daemon=True).start()
 
 
 class DialogHandler:
     def __init__(self, dialog, main_notify_label):
         self.dialog = dialog
         self.main_notify_label = main_notify_label
-        self.calamares_polkit = "calamares-polkit"
 
     def on_md_cancel_clicked(self, widget):
         self.dialog.destroy()
-
-    def run_calamares(self):
-        print(f"INFO: Pretending to run installer: {self.calamares_polkit}")
-        self.main_notify_label.set_markup("<b>Launching installer... Good luck!</b>")
-        self.dialog.destroy()
-        Gtk.main_quit()
-
 
 class App(Gtk.Application):
     def __init__(self, *args, **kwargs):

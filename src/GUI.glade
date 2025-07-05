@@ -1,0 +1,432 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.40.0 -->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <object class="GtkApplicationWindow" id="main_window">
+    <property name="can-focus">False</property>
+    <property name="window-position">center</property>
+    <property name="default-width">750</property>
+    <property name="default-height">400</property>
+    <property name="icon">images/icon.svg</property>
+    <property name="gravity">center</property>
+    <child>
+      <object class="GtkBox" id="vbox">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="margin-start">18</property>
+        <property name="margin-end">18</property>
+        <property name="margin-top">14</property>
+        <property name="margin-bottom">14</property>
+        <property name="orientation">vertical</property>
+        <property name="spacing">2</property>
+        <child>
+          <object class="GtkBox" id="vbox_stack_sidebar">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="orientation">vertical</property>
+            <property name="spacing">10</property>
+            <child>
+              <object class="GtkStackSwitcher" id="stack_switcher">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="halign">center</property>
+                <property name="stack">stack</property>
+              </object>
+              <packing>
+                <property name="expand">False</property>
+                <property name="fill">True</property>
+                <property name="position">0</property>
+              </packing>
+            </child>
+            <child>
+              <object class="GtkStack" id="stack">
+                <property name="visible">True</property>
+                <property name="can-focus">False</property>
+                <property name="margin-top">8</property>
+                <property name="margin-bottom">8</property>
+                <property name="transition-duration">250</property>
+                <property name="transition-type">crossfade</property>
+                <child>
+                  <object class="GtkBox" id="vbox_install_stack">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="orientation">vertical</property>
+                    <property name="spacing">5</property>
+                    <child>
+                      <object class="GtkImage" id="image_logo">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-top">3</property>
+                        <property name="margin-bottom">3</property>
+                        <property name="pixbuf">images/berserkarch.png</property>
+                        <property name="pixel-size">164</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="hbox_install_buttons">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkButton" id="button_easy_install">
+                            <property name="width-request">300</property>
+                            <property name="height-request">60</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="tooltip-markup" translatable="yes">No internet connection required</property>
+                            <signal name="clicked" handler="on_easy_install_clicked" swapped="no"/>
+                            <child>
+                              <object class="GtkLabel" id="easy_install_btn_label">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label">placeholder</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_adv_install">
+                            <property name="width-request">300</property>
+                            <property name="height-request">60</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="receives-default">True</property>
+                            <property name="tooltip-text" translatable="yes">Internet connection required</property>
+                            <signal name="clicked" handler="on_adv_install_clicked" swapped="no"/>
+                            <child>
+                              <object class="GtkLabel" id="adv_install_btn_label">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="label">placeholder</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="hbox_util_buttons">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="spacing">5</property>
+                        <child>
+                          <object class="GtkButton" id="button_mirrors">
+                            <property name="width-request">100</property>
+                            <property name="height-request">30</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="receives-default">False</property>
+                            <property name="tooltip-text">Update Berserk Arch Mirrorlist</property>
+                            <property name="halign">center</property>
+                            <signal name="clicked" handler="on_mirror_clicked" swapped="no"/>
+                            <child>
+                              <object class="GtkLabel" id="update_mirror_btn_label">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="margin-start">4</property>
+                                <property name="margin-end">4</property>
+                                <property name="label">&lt;b&gt;Update Mirrors&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkButton" id="button_gparted">
+                            <property name="label" translatable="yes">Run GParted</property>
+                            <property name="width-request">100</property>
+                            <property name="height-request">30</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="receives-default">False</property>
+                            <property name="tooltip-text">Launch GParted</property>
+                            <signal name="clicked" handler="on_gp_clicked" swapped="no"/>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="vbox_quit">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <child>
+                          <object class="GtkButton" id="button_quit">
+                            <property name="width-request">100</property>
+                            <property name="height-request">30</property>
+                            <property name="visible">True</property>
+                            <property name="can-focus">False</property>
+                            <property name="receives-default">False</property>
+                            <signal name="clicked" handler="on_quit_clicked" swapped="no"/>
+                            <child>
+                              <object class="GtkLabel" id="quit_btn_label">
+                                <property name="visible">True</property>
+                                <property name="can-focus">False</property>
+                                <property name="tooltip-markup" translatable="yes">Close the program</property>
+                                <property name="label">&lt;b&gt;Quit&lt;/b&gt;</property>
+                                <property name="use-markup">True</property>
+                              </object>
+                            </child>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">4</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">welcome</property>
+                    <property name="title" translatable="yes">Welcome</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="vbox_info_stack">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="label_info_header1">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label">&lt;b&gt;Welcome to Berserk Arch&lt;/b&gt;</property>
+                        <property name="use-markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_info">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label">Information placeholder text...</property>
+                        <property name="use-markup">True</property>
+                        <property name="justify">center</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkBox" id="iso-link">
+                        <property name="name">iso-links</property>
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="halign">center</property>
+                        <property name="spacing">8</property>
+                        <child>
+                          <object class="GtkLabel" id="iso-link-1">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="tooltip-markup" translatable="yes">Berserk Arch Official Website</property>
+                            <property name="label">&lt;a href="https://berserkarch.xyz/"&gt;Site&lt;/a&gt;</property>
+                            <property name="use-markup">True</property>
+                            <property name="justify">center</property>
+                            <property name="selectable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">0</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="iso-link-2">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="label">&lt;a href="https://wiki.berserkarch.xyz/"&gt;Wiki&lt;/a&gt;</property>
+                            <property name="use-markup">True</property>
+                            <property name="justify">center</property>
+                            <property name="selectable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">1</property>
+                          </packing>
+                        </child>
+                        <child>
+                          <object class="GtkLabel" id="iso-link-3">
+                            <property name="visible">True</property>
+                            <property name="can-focus">True</property>
+                            <property name="label">&lt;a href="https://gitlab.com/berserkarch/"&gt;Source&lt;/a&gt;</property>
+                            <property name="use-markup">True</property>
+                            <property name="justify">center</property>
+                            <property name="selectable">True</property>
+                          </object>
+                          <packing>
+                            <property name="expand">False</property>
+                            <property name="fill">True</property>
+                            <property name="position">2</property>
+                          </packing>
+                        </child>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">information</property>
+                    <property name="title" translatable="yes">Information</property>
+                    <property name="position">1</property>
+                  </packing>
+                </child>
+                <child>
+                  <object class="GtkBox" id="vbox_credits_stack">
+                    <property name="visible">True</property>
+                    <property name="can-focus">False</property>
+                    <property name="halign">center</property>
+                    <property name="valign">center</property>
+                    <property name="orientation">vertical</property>
+                    <child>
+                      <object class="GtkLabel" id="label_credits_title">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="margin-bottom">8</property>
+                        <property name="label">&lt;b&gt;Development Team&lt;/b&gt;</property>
+                        <property name="use-markup">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">0</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_credits">
+                        <property name="visible">True</property>
+                        <property name="can-focus">False</property>
+                        <property name="label">Gaurav Raj</property>
+                        <property name="use-markup">True</property>
+                        <property name="justify">center</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">1</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_credits1">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="label">&lt;a href="https://thehackersbrain.xyz/"&gt;(@thehackersbrain)&lt;/a&gt;</property>
+                        <property name="use-markup">True</property>
+                        <property name="justify">center</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">2</property>
+                      </packing>
+                    </child>
+                    <child>
+                      <object class="GtkLabel" id="label_credits2">
+                        <property name="visible">True</property>
+                        <property name="can-focus">True</property>
+                        <property name="label">&lt;a href="mailto:me@thehackersbrain.xyz"&gt;&amp;lt;me@thehackersbrain.xyz&amp;gt;&lt;/a&gt;</property>
+                        <property name="use-markup">True</property>
+                        <property name="justify">center</property>
+                        <property name="selectable">True</property>
+                      </object>
+                      <packing>
+                        <property name="expand">False</property>
+                        <property name="fill">True</property>
+                        <property name="position">3</property>
+                      </packing>
+                    </child>
+                  </object>
+                  <packing>
+                    <property name="name">credits</property>
+                    <property name="title" translatable="yes">Credits</property>
+                    <property name="position">2</property>
+                  </packing>
+                </child>
+              </object>
+              <packing>
+                <property name="expand">True</property>
+                <property name="fill">True</property>
+                <property name="position">1</property>
+              </packing>
+            </child>
+            <style>
+              <class name="stack_box"/>
+            </style>
+          </object>
+          <packing>
+            <property name="expand">True</property>
+            <property name="fill">True</property>
+            <property name="position">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+    <child type="titlebar">
+      <object class="GtkHeaderBar" id="headerbar1">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="title" translatable="yes">Welcome to Berserk Arch</property>
+        <property name="show-close-button">True</property>
+      </object>
+    </child>
+  </object>
+</interface>

@@ -19,7 +19,7 @@ class Handler:
             "button_mirrors", "button_gparted", "label_welcome_message",
             "hbox_util_buttons", "hbox_install_buttons", "hbox_footer_buttons",
             "label_info", "label_info_header1",
-            "easy_install_btn_label", "adv_install_btn_label"
+            "easy_install_btn_label", "adv_install_btn_label", "image_logo",
             ]
 
         [setattr(self, i, self.builder.get_object(i)) for i in widget_ids]
@@ -27,6 +27,7 @@ class Handler:
     def setup_dynamic_widgets(self):
         self.easy_install_btn_label.set_markup("<b>Easy Installation (Offline)</b>")
         self.adv_install_btn_label.set_markup("<b>Advanced Install (Online)</b>")
+        self.image_logo.set_from_file("/usr/share/berserk-welcome/images/berserkarch.png")
 
         desc = (
             "A bleeding-edge, security centric Arch-based Linux Distribution.\n"
@@ -117,6 +118,7 @@ class App(Gtk.Application):
             builder.connect_signals(handler)
             self.window = builder.get_object("main_window")
             self.window.set_application(self)
+            self.window.set_icon_name("berserkarch-app")
             self.window.show_all()
 
 

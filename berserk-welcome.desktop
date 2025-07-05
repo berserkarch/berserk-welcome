@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=BerserArch Welcome
+GenericName=BerserArch Welcome
+X-GNOME-FullName=BerserkArch Welcome
+Comment=Welcome Application for BerserkArch Install
+Exec=/usr/local/bin/berserk-welcome
+Icon=berserkarch-app
+Terminal=false
+Type=Application
+Categories=GTK;Settings;Security;X-GNOME-Settings-Panel;X-GNOME-SystemSettings;X-Unity-Settings-Panel;X-XFCE-SettingsDialog;X-XFCE-SystemSettings;
+Keywords=welcome;tool;
+StartupNotify=true

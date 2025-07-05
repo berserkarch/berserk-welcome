@@ -2,9 +2,13 @@ import gi
 import sys
 import threading
 import subprocess
+import os
 
 gi.require_version("Gtk", "3.0")
 from gi.repository import Gtk, GLib
+
+base_dir = os.path.dirname(os.path.abspath(__file__))
+
 
 class Handler:
     def __init__(self, builder):
@@ -15,19 +19,28 @@ class Handler:
 
     def get_widgets(self):
         widget_ids = [
-            "label_notify", "button_easy_install", "button_adv_install",
-            "button_mirrors", "button_gparted", "label_welcome_message",
-            "hbox_util_buttons", "hbox_install_buttons", "hbox_footer_buttons",
-            "label_info", "label_info_header1",
-            "easy_install_btn_label", "adv_install_btn_label", "image_logo",
-            ]
+            "label_notify",
+            "button_easy_install",
+            "button_adv_install",
+            "button_mirrors",
+            "button_gparted",
+            "label_welcome_message",
+            "hbox_util_buttons",
+            "hbox_install_buttons",
+            "hbox_footer_buttons",
+            "label_info",
+            "label_info_header1",
+            "easy_install_btn_label",
+            "adv_install_btn_label",
+            "image_logo",
+        ]
 
         [setattr(self, i, self.builder.get_object(i)) for i in widget_ids]
 
     def setup_dynamic_widgets(self):
         self.easy_install_btn_label.set_markup("<b>Easy Installation (Offline)</b>")
         self.adv_install_btn_label.set_markup("<b>Advanced Install (Online)</b>")
-        self.image_logo.set_from_file("/usr/share/berserk-welcome/images/berserkarch.png")
+        self.image_logo.set_from_file(os.path.join(base_dir, "images/berserkarch.png"))
 
         desc = (
             "A bleeding-edge, security centric Arch-based Linux Distribution.\n"
@@ -46,24 +59,25 @@ class Handler:
     def on_easy_install_clicked(self, widget):
         self.label_notify.set_markup("Running the Installer...")
         self.run_cmd(["pkexec", "calamares", "--debug"])
-        self.window.get_application().quit()
 
     def on_adv_install_clicked(self, widget):
         self.launch_advanced_installer_dialog("Advanced Installation")
 
     def on_gp_clicked(self, widget):
-        self.on_button_clicked(widget, ["pkexec", "gparted"], "Launching GParted...")
+        self.on_button_clicked(widget, ["sudo", "gparted"], "Launching GParted...")
 
     def on_mirror_clicked(self, widget):
-        self.on_button_clicked(widget, ["pkexec", "pacman", "-Syyu", "--noconfirm"], "Updating mirrors...")
-    
+        self.on_button_clicked(
+            widget, ["sudo", "pacman", "-Syyu", "--noconfirm"], "Updating mirrors..."
+        )
+
     def on_quit_clicked(self, widget):
         self.window.get_application().quit()
 
     def launch_advanced_installer_dialog(self, install_method):
         builder = Gtk.Builder()
         try:
-            builder.add_from_file("NotifyAction.glade")
+            builder.add_from_file(os.path.join(base_dir, "NotifyAction.glade"))
         except GLib.Error as e:
             print(f"FATAL: Could not load NotifyAction.glade: {e}")
             return
@@ -79,16 +93,27 @@ class Handler:
     def run_cmd(self, cmd_array):
         def _run():
             print(f"THREAD: Running command: {' '.join(cmd_array)}")
-            GLib.timeout_add_seconds(5, lambda: self.label_notify.set_markup("") or False)
+            GLib.timeout_add_seconds(
+                5, lambda: self.label_notify.set_markup("") or False
+            )
             try:
                 subprocess.run(cmd_array, check=True)
             except FileNotFoundError:
-                GLib.idle_add(self.label_notify.set_markup, "<span foreground='red'><b>Command not found!</b></span>")
+                GLib.idle_add(
+                    self.label_notify.set_markup,
+                    "<span foreground='red'><b>Command not found!</b></span>",
+                )
             except subprocess.CalledProcessError as e:
-                GLib.idle_add(self.label_notify.set_markup, f"<span foreground='red'><b>Error: {e}</b></span>")
+                GLib.idle_add(
+                    self.label_notify.set_markup,
+                    f"<span foreground='red'><b>Error: {e}</b></span>",
+                )
             else:
-                GLib.idle_add(self.label_notify.set_markup, "<span foreground='green'><b>Task completed!</b></span>")
-        
+                GLib.idle_add(
+                    self.label_notify.set_markup,
+                    "<span foreground='green'><b>Task completed!</b></span>",
+                )
+
         threading.Thread(target=_run, daemon=True).start()
 
 
@@ -100,6 +125,7 @@ class DialogHandler:
     def on_md_cancel_clicked(self, widget):
         self.dialog.destroy()
 
+
 class App(Gtk.Application):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, application_id="info.berserkarch.welcome", **kwargs)
@@ -109,7 +135,7 @@ class App(Gtk.Application):
         if not self.window:
             builder = Gtk.Builder()
             try:
-                builder.add_from_file("GUI.glade")
+                builder.add_from_file(os.path.join(base_dir, "GUI.glade"))
             except GLib.Error as e:
                 print(f"FATAL: Could not load GUI.glade: {e}")
                 sys.exit(1)

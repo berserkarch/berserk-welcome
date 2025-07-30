@@ -38,8 +38,8 @@ class Handler:
         [setattr(self, i, self.builder.get_object(i)) for i in widget_ids]
 
     def setup_dynamic_widgets(self):
-        self.easy_install_btn_label.set_markup("<b>Easy Installation (Offline)</b>")
-        self.adv_install_btn_label.set_markup("<b>Advanced Install (Online)</b>")
+        self.easy_install_btn_label.set_markup("<b>Easy Installation</b>")
+        self.adv_install_btn_label.set_markup("<b>Advanced Install </b>")
         self.image_logo.set_from_file(os.path.join(base_dir, "images/berserkarch.png"))
 
         desc = (

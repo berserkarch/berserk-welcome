@@ -63,7 +63,7 @@ class Handler:
         
     def on_adv_install_clicked(self, widget):
         self.label_notify.set_markup("Running the Installer...")
-        cmd = "sudo cp /etc/calamares/settings_online.conf /etc/calamares/settings.conf && calamares -D9 | tee -a /home/liveuser/berserkarch-install.log"
+        cmd = "pipx install btweak && btweak fix --gpg && btweak fix --db-lck && sudo cp /etc/calamares/settings_online.conf /etc/calamares/settings.conf && calamares -D9 | tee -a /home/liveuser/berserkarch-install.log"
         self.run_cmd([cmd], shell=True)
 
     def on_gp_clicked(self, widget):

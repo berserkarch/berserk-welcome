@@ -391,7 +391,7 @@
                           <object class="GtkLabel" id="p-link-1">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
-                            <property name="label">&lt;a href="https://thehackersbrain.xyz"&gt;Portfolio&lt;/a&gt;</property>
+                            <property name="label">&lt;a href="https://thehackersbrain.dev"&gt;Portfolio&lt;/a&gt;</property>
                             <property name="use-markup">True</property>
                             <property name="justify">center</property>
                             <property name="selectable">True</property>
@@ -400,21 +400,6 @@
                             <property name="expand">False</property>
                             <property name="fill">True</property>
                             <property name="position">0</property>
-                          </packing>
-                        </child>
-                        <child>
-                          <object class="GtkLabel" id="p-link-2">
-                            <property name="visible">True</property>
-                            <property name="can-focus">True</property>
-                            <property name="label">&lt;a href="http://blog.thehackersbrain.xyz"&gt;Blog&lt;/a&gt;</property>
-                            <property name="use-markup">True</property>
-                            <property name="justify">center</property>
-                            <property name="selectable">True</property>
-                          </object>
-                          <packing>
-                            <property name="expand">False</property>
-                            <property name="fill">True</property>
-                            <property name="position">1</property>
                           </packing>
                         </child>
                         <child>
@@ -443,7 +428,7 @@
                       <object class="GtkLabel" id="label_credits2">
                         <property name="visible">True</property>
                         <property name="can-focus">True</property>
-                        <property name="label">&lt;a href="mailto:me@thehackersbrain.xyz"&gt;&amp;lt;me@thehackersbrain.xyz&amp;gt;&lt;/a&gt;</property>
+                        <property name="label">&lt;a href="mailto:gaurav@thehackersbrain.dev"&gt;&amp;lt;gaurav@thehackersbrain.dev&amp;gt;&lt;/a&gt;</property>
                         <property name="use-markup">True</property>
                         <property name="justify">center</property>
                         <property name="selectable">True</property>

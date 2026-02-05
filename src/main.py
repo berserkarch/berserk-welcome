@@ -38,8 +38,8 @@ class Handler:
         [setattr(self, i, self.builder.get_object(i)) for i in widget_ids]
 
     def setup_dynamic_widgets(self):
-        self.easy_install_btn_label.set_markup("<b>Easy Installation</b>")
-        self.adv_install_btn_label.set_markup("<b>Advanced Install </b>")
+        self.easy_install_btn_label.set_markup("<b>Offline Install</b>")
+        self.adv_install_btn_label.set_markup("<b>Online Install </b>")
         self.image_logo.set_from_file(os.path.join(base_dir, "images/berserkarch.png"))
 
         desc = (
@@ -58,18 +58,21 @@ class Handler:
 
     def on_easy_install_clicked(self, widget):
         self.label_notify.set_markup("Running the Installer...")
-        self.run_cmd(["pkexec", "calamares", "--debug"])
-
+        cmd = "sudo cp /etc/calamares/settings_offline.conf /etc/calamares/settings.conf && calamares -D9 | tee -a /home/liveuser/berserkarch-install.log"
+        self.run_cmd([cmd], shell=True)
+        
     def on_adv_install_clicked(self, widget):
-        self.launch_advanced_installer_dialog("Advanced Installation")
+        self.label_notify.set_markup("Running the Installer...")
+        cmd = "sudo cp /etc/calamares/settings_online.conf /etc/calamares/settings.conf && calamares -D9 | tee -a /home/liveuser/berserkarch-install.log"
+        self.run_cmd([cmd], shell=True)
 
     def on_gp_clicked(self, widget):
         self.on_button_clicked(widget, ["sudo", "gparted"], "Launching GParted...")
 
     def on_mirror_clicked(self, widget):
-        self.on_button_clicked(
-            widget, ["sudo", "pacman", "-Syyu", "--noconfirm"], "Updating mirrors..."
-        )
+        self.label_notify.set_markup("<b>Updating mirrors...</b>")
+        cmd = "sudo pipx install btweak --global --force && btweak fix --gpg"
+        self.run_cmd([cmd], shell=True)
 
     def on_quit_clicked(self, widget):
         self.window.get_application().quit()
@@ -90,30 +93,43 @@ class Handler:
         dialog.run()
         dialog.destroy()
 
-    def run_cmd(self, cmd_array):
+    def run_cmd(self, cmd_array, shell=False):
         def _run():
-            print(f"THREAD: Running command: {' '.join(cmd_array)}")
-            GLib.timeout_add_seconds(
-                5, lambda: self.label_notify.set_markup("") or False
-            )
+            print(f"THREAD: Running command: {cmd_array}")
             try:
-                subprocess.run(cmd_array, check=True)
-            except FileNotFoundError:
-                GLib.idle_add(
-                    self.label_notify.set_markup,
-                    "<span foreground='red'><b>Command not found!</b></span>",
-                )
-            except subprocess.CalledProcessError as e:
-                GLib.idle_add(
-                    self.label_notify.set_markup,
-                    f"<span foreground='red'><b>Error: {e}</b></span>",
-                )
-            else:
+                if shell:
+                    result = subprocess.run(
+                        cmd_array[0], 
+                        shell=True, 
+                        check=True,
+                        capture_output=True,
+                        text=True
+                    )
+                else:
+                    result = subprocess.run(
+                        cmd_array, 
+                        check=True,
+                        capture_output=True,
+                        text=True
+                    )
+                
                 GLib.idle_add(
                     self.label_notify.set_markup,
                     "<span foreground='green'><b>Task completed!</b></span>",
                 )
-
+                GLib.timeout_add_seconds(5, lambda: self.label_notify.set_markup("") or False)
+                
+            except FileNotFoundError as e:
+                GLib.idle_add(
+                    self.label_notify.set_markup,
+                    f"<span foreground='red'><b>Command not found: {cmd_array[0]}</b></span>",
+                )
+            except subprocess.CalledProcessError as e:
+                error_msg = e.stderr.strip() if e.stderr else str(e)
+                GLib.idle_add(
+                    self.label_notify.set_markup,
+                    f"<span foreground='red'><b>Error: {error_msg}</b></span>",
+                )
         threading.Thread(target=_run, daemon=True).start()
 
 
@@ -151,3 +167,4 @@ class App(Gtk.Application):
 if __name__ == "__main__":
     app = App()
     sys.exit(app.run(sys.argv))
+

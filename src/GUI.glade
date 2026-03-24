@@ -289,7 +289,7 @@
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
                             <property name="tooltip-markup" translatable="yes">Berserk Arch Official Website</property>
-                            <property name="label">&lt;a href="https://berserkarch.xyz/"&gt;Site&lt;/a&gt;</property>
+                            <property name="label">&lt;a href="https://berserkarch.org/"&gt;Site&lt;/a&gt;</property>
                             <property name="use-markup">True</property>
                             <property name="justify">center</property>
                             <property name="selectable">True</property>
@@ -304,7 +304,7 @@
                           <object class="GtkLabel" id="iso-link-2">
                             <property name="visible">True</property>
                             <property name="can-focus">True</property>
-                            <property name="label">&lt;a href="https://wiki.berserkarch.xyz/"&gt;Wiki&lt;/a&gt;</property>
+                            <property name="label">&lt;a href="https://berserkarch.org/docs"&gt;Wiki&lt;/a&gt;</property>
                             <property name="use-markup">True</property>
                             <property name="justify">center</property>
                             <property name="selectable">True</property>
